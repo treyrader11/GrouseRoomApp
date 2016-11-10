@@ -5,9 +5,9 @@ var Pantry = function(pantry) {
 }
 
 var pantryItems = new Pantry({
-    strong: ['Vodka', 'Bourbon', 'Gin', 'Famous Grouse Scotch', 'Scotch'],
+    strong: ['Vodka', 'Bourbon', 'Famous Grouse Scotch'],
     salty: ['Olives', 'Salt', 'Bacon'],
-    bitter: ['Lemon Peel','Tonic', 'Bitters', 'Lemon Juice'],
-    sweet: ['Local Cane Sugar', 'Honey', 'Soda', 'Syrup'], 
-    fruity: ['Freshly Squeezed Orange Juice', 'Freshly Squeezed Grapefruit Juice', 'Cucumber', 'Orange Peel'] 
+    bitter: ['Tonic', 'Bitters', 'Lemon Juice'],
+    sweet: ['Local Cane Sugar', 'Honey', 'Soda'], 
+    fruity: ['Freshly Squeezed Orange Juice', 'Freshly Squeezed Grapefruit Juice', 'Cucumber'] 
 })

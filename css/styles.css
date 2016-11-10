@@ -112,6 +112,20 @@ ul {
 
 
 #ingredients {
+	margin-top: 30px;
+
+}
+
+#ingredients h3 {
+	text-decoration: underline;
+}
+
+#another-drink {
+	margin-top: 175px;
+	display: none;
+}
+
+#goodbye {
 	margin-top: 50px;
 }
 

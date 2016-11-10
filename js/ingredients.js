@@ -11,3 +11,5 @@ var drinkIngredients = new Ingredients([
 	"sweet",
 	"fruity"
 ]);
+
+//var preferences = new Ingredients(drinkIngredientsRequested);

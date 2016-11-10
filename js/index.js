@@ -22,7 +22,7 @@ $(function() {
 
 	function ifYes() {
 		if  (bartenderQuestions.question[questionIndex]) {
-			console.log(bartenderQuestions.question[questionIndex]);
+			//console.log(bartenderQuestions.question[questionIndex]);
 			// pushing users preferences to the empty drinkIngredientsRequested array
 			drinkIngredientsRequested.push(drinkIngredients.ingredients[questionIndex])
 			$userPreference.text("You like your drinks " + drinkIngredients.ingredients[questionIndex]);
@@ -33,25 +33,34 @@ $(function() {
 		if (bartenderQuestions.question[questionIndex]) {
 			
 			$userPreference.text("No thanks.");
-			console.log('inside the ifNo function')
+			//console.log('inside the ifNo function')
 		}
 	}
 
 	function endQuestions() {
 		if (questionIndex == 5) {
 			var preferences = new Ingredients(drinkIngredientsRequested);
-				
+			console.log('"ingredients" for new Ingredients instance', preferences);	
 			//random number between 0 and 3, if added + 1, it'll be between 1 and 3
 			var randomNumber = Math.floor(Math.random() * 3);
-			var createDrink = " ";
+			var createDrink = " "; //<--puts each item of the array into quotes, so will need bracket notation to accessprop
 			
 			for (var i = 0 ; i < preferences.ingredients.length; i++) {
-				createDrink += pantryItems.pantry[preferences.ingredients[i]][randomNumber] + " ";
+				createDrink += "<li>" +pantryItems.pantry[preferences.ingredients[i]][randomNumber]+ "</li>";
 			}
+			$('#ingredients').append(createDrink);
 
-			$("#drink-results").prepend("<li>William made you a special drink with " + createDrink+ "</li>");
+			//need bracket notation because '"strong"' is a string inside of the drink
+			//IngredientsRequested array. 
+			console.log(pantryItems.pantry["strong"]);
 
-			console.log(createDrink);
+
+			
+
+			createDrink = createDrink.toLowerCase();
+			$("#drink-results").prepend("<li>William made you a special drink!</li>");
+
+			//console.log(createDrink);
 			var cocktail = "";
 
 	   		$barPage.hide('puff', function() {
@@ -60,10 +69,26 @@ $(function() {
 					$('#drink-shaker').toggle('shake', { times: 30 }, 'slow', function() {
 						$(this).hide();
 						$('#drink-results-container').show('slide');
+						$('#another-drink').fadeIn(1000);
 					});
 				});
 			});
 		}
+	}
+
+	function getAnotherDrink() {
+		var count = 0;
+		var questionIndex = 0;
+		var drinkIngredientsRequested = [];
+		$('#results').fadeOut(500, function() {
+			$barPage.show('slide');
+		})
+
+	}
+
+	function leaveBar() {
+		$('#results').fadeOut(2000);
+		$('body').html("<h1 id='goodbye'><Thank you!</h1>")
 	}
 
 
@@ -79,21 +104,35 @@ $(function() {
 	});	
 
 	$yesButton.click(function(){
+		$(this).fadeOut(200);
+		$noButton.fadeOut(200, function() {
+			$userPreference.show('slide');
+			$nextButton.show('slide');
+		});
 		ifYes();
 		count++;
-		$userPreference.show('slide');
-		$nextButton.show('slide');
+		//$userPreference.show('slide');
+		//$nextButton.show('slide');
 	})
 
 	$noButton.click(function() {
+		$(this).fadeOut(200);
+		$yesButton.fadeOut(200, function() {
+			$userPreference.show('slide');
+			$nextButton.show('slide');
+		});
 		ifNo();
 		count++;
-		$userPreference.show('slide');
-		$nextButton.show('slide');
+		//$userPreference.show('slide');
+		//$nextButton.show('slide');
 
 	})
 
 	$nextButton.click(function() {
+		$(this).hide('slide', function() {
+			$noButton.fadeIn(200);
+			$yesButton.fadeIn(200);
+		});
 		questionIndex++;
 		console.log("your preferences:", drinkIngredientsRequested);
 		$bubbleChat.fadeOut(500);
@@ -108,6 +147,14 @@ $(function() {
 			$userPreference.empty();
 		});
 	});
+
+	$('#yes-again').click(function() {
+		getAnotherDrink();
+	})
+
+	$('#no-again').click(function() {
+		leaveBar();
+	})
 });
 
 

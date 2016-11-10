@@ -2,55 +2,77 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Grouse Room Testing</title>
-	<link rel="stylesheet" type="text/css" href="css/styles.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" type="image/png" href="http://thegrouseroom.com.s50556.gridserver.com/wp-content/uploads/2014/10/logo1.png">
+	<link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
+
+	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<title>The Grouse Room</title>
+	<link rel="stylesheet" href="css/styles.css">
+	
 </head>
-<body>
+<body class="bg-img">
 
-	<section class="content" id="menu">
-		
-	<!--each question from the Questions constructor displays here-->
+<!--introduction modal-->
 
-		<p id="question">Yo, you wanna drink?</p>
-		<br/>
-	
-	<!--buttons-->
-
-		<div class="buttons">
-			<button class="btn" id="yes-btn">Yes</button>
-			<button class="btn" id="yes-btn-first">Yes</button>
-			<button class="btn" id="no-btn">No</button>
+	<div class="container" id="intro-content">
+			<h2 class="text-center merriweather">Welcome to the Grouse Room.</h2>
+			<h4 class="text-center header">If you are seeking to have the best cocktail experience of your life, then you've come to the right place. Simply answer each question as decisively as possible so that William, our bartender, can make some magic.</h4>
+			<h4 class="text-center header">No disappointments allowed!</h4>
+		</div><br/>
+		<div class="container text-center">
+			<button class="btn btn-primary" id="ok-btn">OK</button>
 		</div>
-		<br/>
-			
-		<!--<div id="nxt-btn">NEXT QUESTION</div><br/><br/>-->
 	
-	<!--reassurance of user's pref will display-->		
-		<h3 id="preference">preference goes here</h3>
-		<ul id="ingredients">
-			
-		</ul>
-	</section>
+
+<!--question modal-->
+
+		<div class="container-fluid text-center" id="question-content">
+			<div class="container-fluid text-center" id="img-section">
+				<ul class="list-group" id="image-list">
+					<li id="william"><img src="https://scontent-dft4-1.xx.fbcdn.net/v/t1.0-9/13445398_518326608350466_9162003980221732477_n.jpg?oh=df2bf3e4a821b651a1e88a9501967814&oe=587E0530" alt="William, the bartender" height="300" width="300"></li>
+					<li id="bubble"><img src="http://www.freestockphotos.biz/pictures/15/15680/Illustration+of+a+cartoon+speech+bubble.png" alt="chat bubble" height="300" width="300"></li>
+					<strong><li id="question"></li></strong>
+				</ul>
+			</div>
+		
+			<br/>
+			<div class="container text-center">
+				<button class="btn btn-primary" id="yes-btn">Yes</button>
+				<button class="btn btn-primary" id="no-btn">No</button>
+			</div>
+			<br/>
+			<div class="text-center" id="nxt-btn">NEXT QUESTION</div>
+			<br/>
+			<p class="text-center white" id="user-preference"></p>
+		</div>
 
 
 
 
-		<!-- results will be displayed here-->
+		<!-- results modal-->
 
-	<section class="content" id="drink-results">
-		<ul id="drink">
-			<li><h3>Ingredients:</h3></li>
-		</ul>
-	</section>
+		<div class="container-fluid text-center" id="results">
+			<div class="container text-center" id="drink-shaker"><img src="http://f.tqn.com/y/cocktails/1/W/-/e/-/-/ShakeTips-105197630.jpg" alt="drink shaker for cocktail" height="350" width="400"></div>
+			<div class="container text-center merriweather" id="drink-results-container">
+				<ul class="text-center" id="drink-results">
+				</ul>
+				<ul class="text-center" id="ingredients">
+					<li><h3>Ingredients:</h3></li>
+				</ul>
+			</div>
+		</div>
 
 
 <!--order of scripts are important-->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
 	<script src="js/questions.js"></script>
 	<script src="js/pantry.js"></script>
 	<script src="js/ingredients.js"></script>
 	<script src="js/index.js"></script>
-
 </body>
 </html>

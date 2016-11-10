@@ -10,4 +10,4 @@ var pantryItems = new Pantry({
     bitter: ['Lemon Peel','Tonic', 'Bitters', 'Lemon Juice'],
     sweet: ['Local Cane Sugar', 'Honey', 'Soda', 'Syrup'], 
     fruity: ['Freshly Squeezed Orange Juice', 'Freshly Squeezed Grapefruit Juice', 'Cucumber', 'Orange Peel'] 
-});
+})

@@ -1,57 +1,193 @@
-body {
-	background: #eeeeee;
+
+* {
+	box-sizing: border-box;
 }
 
-.content {
-	width: 600px;
-	height: 600px;
-	margin: 0 auto;
-	padding: 10px 50px 50px 50px;
-	border-radius: 50px;
-	border: 2px solid #cbcbcb;
-	box-shadow: 10px 13px 5px #cbcbcb;
-	text-align: center;
+ul {
+	list-style-type: none;
 }
 
-p#question {
-	margin-top: 77px;
-	font-size: 25px;
+.merriweather {
+	font-family: 'Merriweather', serif;
+
 }
 
-.btn {
-	background: rgb(32, 35, 32);
-	color: #fff;
-	text-align: center;
+#intro-content,
+#question-content,
+#ok-btn,
+#results,
+#question,
+#nxt-btn,
+#user-preference,
+#drink-results-container {
+	display: none;
+}
+
+.white {
+	color: white;
+}
+
+.bg-img {
+	background: url("http://thegrouseroom.com/wp-content/uploads/2014/10/grouse_new_2015.jpg") no-repeat center center fixed;
+	-webkit-background-size: cover;
+  	-moz-background-size: cover;
+  	-o-background-size: cover;
+  	background-size: cover;
+}
+
+.header:nth-child(3) { 
+	color: red;
 	font-size: 20px;
-	padding: 4px 9px;
 }
 
-.btn:focus {
-	outline: 0;
-}
-
-.btn:hover {
-	cursor: pointer;
+#intro-content {
+	border: solid 2px red;
+	margin-top: 108px;
+	background: white;
 	opacity: .7;
 }
 
-
-#drink-results {
-	display: none;
-	text-align: center;
-}
-#yes-btn, #preference, #no-btn {
-	display: none;
+#question-content {
+	margin: 30px auto;
+	margin-top: 120px;
 }
 
-#drink,
-ul#ingredients {
-	list-style-type: none;
-	text-align: center;
+#results {
+	background: transparent;
+	color: white;
 }
 
-#ingredients > li {
+
+#image-list li {
+	display: inline;
+
+}
+
+#bubble {
+	position: absolute;
+	top: -4%;
+	left: 54%;
+}
+
+#question {
+	position: absolute;
+	top: 9%;
+	right: 10%;
+	font-style: bold;
+}
+
+#nxt-btn {
 	font-size: 20px;
+	color: white;
+}
+
+#nxt-btn:hover {
+	cursor: pointer;
 	color: red;
 }
 
+#nxt-btn:active {
+	margin-top: 2px;
+}
+
+#drink-shaker {
+	margin-top: 40px;
+}
+
+#drink-results-container {
+	margin-top: 108px;
+	background: white;
+	border: solid red 2px;
+	opacity: .7;
+	padding: 50px;
+	color: black;
+	font-size: 20px;
+} 
+
+#drink-results {
+	list-style-type: none;
+	font-family: 'Merriweather', serif;
+	margin-top: -46px;
+}
+
+
+#ingredients {
+	margin-top: 50px;
+}
+
+@media only screen and (max-width: 1015px ) {
+	#question {
+		top: 9%;
+		right: 21%;
+	}  
+}
+
+
+@media only screen and (min-width: 900px ) {
+	#question {
+		top: 9%;
+		right: 19%;
+	}  
+}
+
+@media only screen and (max-width: 846px ) {
+	#question {
+		top: 9%;
+		right: 16%;
+	}  
+}
+
+@media only screen and (max-width: 836px ) {
+	#question {
+		top: 9%;
+		right: 16%;
+	}  
+}
+
+@media only screen and (max-width: 830px ) {
+	#question {
+		top: 9%;
+		right: 16%;
+	}  
+}
+
+@media only screen and (max-width: 826px ) {
+	#question {
+		top: 9%;
+		right: 15%;
+	}  
+}
+
+@media only screen and (max-width: 700px ) {
+	#question {
+		top: 9%;
+		right: 9%;
+	}  
+}
+
+@media only screen and (max-width: 650px ) {
+	#question {
+		top: 9%;
+		right: 6%;
+	}  
+}
+
+@media only screen and (max-width: 614px ) {
+	#question {
+		top: 9%;
+		right: 4%;
+	}  
+}
+
+@media only screen and (max-width: 320px ) {
+	#question {
+		top: 9%;
+		right: 21%;
+	}
+
+	#william {
+		margin-top: 61px;
+	}
+
+
+}

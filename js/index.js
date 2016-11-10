@@ -1,81 +1,129 @@
 'use strict'
 
-var questionHTML = document.getElementById('question');
-var preferenceHTML = document.getElementById('preference');
-var ingredientsHTML = document.getElementById('ingredients');
-var yesBtnHTML = document.getElementById('yes-btn');
-var noBtnHTML = document.getElementById('no-btn');
-var firstYesBtn = document.getElementById('yes-btn-first');
-var randomNumber = Math.floor(Math.random() * 3);
+var $displayQuestion = $('#question')
+var $yesButton = $('#yes-btn')
+var $noButton = $('#no-btn')
+var $nextButton = $('#nxt-btn')
+var $okButton = $('#ok-btn')
+var $userPreference = $('#user-preference')
+var $bubbleChat = $('#bubble > img')
+var	$introductionPage = $('#intro-content')
+var $barPage = $('#question-content')
+var count = 0;
 var questionIndex = 0;
-var ingredientIndex = 0;
-//var count = 0;
-var preferences = [];
-
-$(document).ready(function() {
+var drinkIngredientsRequested = [];
 	
+$displayQuestion.hide();
+$introductionPage.fadeIn(2000);
+$okButton.fadeIn(2000); 
 
+	
+$(function() {
 
-	function sayYes() {
-		if(bartenderQuestions.questions[questionIndex] === '"Do ya like your drinks strong?"') {
-			questionIndex++;
+	function ifYes() {
+		if  (bartenderQuestions.question[questionIndex]) {
+			console.log(bartenderQuestions.question[questionIndex]);
+			// pushing users preferences to the empty drinkIngredientsRequested array
+			drinkIngredientsRequested.push(drinkIngredients.ingredients[questionIndex])
+			$userPreference.text("You like your drinks " + drinkIngredients.ingredients[questionIndex]);
 		}
-		yesBtnHTML.onclick = function() {
-			if(questionIndex < drinkIngredients.ingredients.length) {
-				questionHTML.innerHTML = bartenderQuestions.getQuestion();
-				var pref = "You like your drinks:";
-				var ingredient = "<li>" + drinkIngredients.getPreference(); + "</li>";
-				preferenceHTML.innerHTML = pref;
-				$('#preference').show();
-				$('#ingredients').prepend(ingredient);
+	}
 
-				//passing in the current ingredient as an argument
-				drinkIngredients.mixTheDrink(drinkIngredients.getPreference());
-				questionIndex++;
-				console.log("question number", questionIndex);
-				ingredientIndex++;
-				console.log("ingredient number", ingredientIndex);
+	function ifNo() {
+		if (bartenderQuestions.question[questionIndex]) {
+			
+			$userPreference.text("No thanks.");
+			console.log('inside the ifNo function')
+		}
+	}
+
+	function endQuestions() {
+		if (questionIndex == 5) {
+			var preferences = new Ingredients(drinkIngredientsRequested);
+				
+			//random number between 0 and 3, if added + 1, it'll be between 1 and 3
+			var randomNumber = Math.floor(Math.random() * 3);
+			var createDrink = " ";
+			
+			for (var i = 0 ; i < preferences.ingredients.length; i++) {
+				createDrink += pantryItems.pantry[preferences.ingredients[i]][randomNumber] + " ";
 			}
-			else {
-				$('#menu').hide('slide', function() {
-					$('#drink-results').show('slide');
-				})
-			}	
-		};
-	};
 
-	firstYesBtn.onclick = function() {
-		$('#yes-btn-first').hide(function() {
-			$(this).next().show();
-			$(this).prev().show();
-		});
-		questionHTML.innerHTML = bartenderQuestions.getQuestion();
-		sayYes();
-	};
+			$("#drink-results").prepend("<li>William made you a special drink with " + createDrink+ "</li>");
 
-	/*yesBtnHTML.onclick = function() {
-		if(questionIndex < drinkIngredients.ingredients.length) {
-			questionHTML.innerHTML = bartenderQuestions.getQuestion();
-			var pref = "You like your drinks:";
-			var ingredient = "<li>" + drinkIngredients.getPreference(); + "</li>";
-			preferenceHTML.innerHTML = pref;
-			$('#preference').show();
-			$('#ingredients').prepend(ingredient);
+			console.log(createDrink);
+			var cocktail = "";
 
-			//passing in the current ingredient as an argument
-			drinkIngredients.mixTheDrink(drinkIngredients.getPreference());
-			questionIndex++;
-			console.log(questionIndex);	
+	   		$barPage.hide('puff', function() {
+
+				$('#results').fadeIn(1000, function() {
+					$('#drink-shaker').toggle('shake', { times: 30 }, 'slow', function() {
+						$(this).hide();
+						$('#drink-results-container').show('slide');
+					});
+				});
+			});
 		}
-		else {
-			$('#menu').hide('slide', function() {
-				$('#drink-results').show('slide');
-			})
-		}	
-	};*/
+	}
 
-	noBtnHTML.onclick = function() {
-		var pref = "You don't like your drinks " + drinkIngredients.getPreference();
-		preferenceHTML.innerHTML = pref;
-	};
+
+	$okButton.click(function() {
+		$(this).hide('slide')
+		$introductionPage.hide('drop', function() {
+			$barPage.show('slide', function() {
+				$displayQuestion.append(bartenderQuestions.question[questionIndex]);
+				$bubbleChat.fadeIn(1000);
+				$displayQuestion.fadeIn(1000);
+			});
+		});
+	});	
+
+	$yesButton.click(function(){
+		ifYes();
+		count++;
+		$userPreference.show('slide');
+		$nextButton.show('slide');
+	})
+
+	$noButton.click(function() {
+		ifNo();
+		count++;
+		$userPreference.show('slide');
+		$nextButton.show('slide');
+
+	})
+
+	$nextButton.click(function() {
+		questionIndex++;
+		console.log("your preferences:", drinkIngredientsRequested);
+		$bubbleChat.fadeOut(500);
+		$displayQuestion.fadeOut(500, function() {
+			$(this).empty();
+			$(this).append(bartenderQuestions.question[questionIndex]);
+			endQuestions();	
+		});
+		$bubbleChat.fadeIn(500);
+		$displayQuestion.fadeIn(500);
+		$userPreference.hide('slide', function() {
+			$userPreference.empty();
+		});
+	});
 });
+
+
+
+/*var AllDrinks = new Drink({
+		// speciality drinks
+		Grouse_Hiball: ['Lemon Juice', 'Soda', 'Scotch'],
+		Scottish_Maid: ['Famous Grouse Scotch', 'St Germain elderflower liquer', 'Cucumber', 'Lemon Juice'],
+		Rob_Roy: ['Famous Grouse Scotch', 'Sweet Vermouth', 'Bitters'],
+		Blood_and_Sand: ['Famous Grouse Scotch', 'Cherry Heering Brandy', 'Freshly Squeezed Orange Juice', 'Sweet Vermouth'],
+		// classic drinks
+		Old_Fashioned: ['Bourbon', 'Bitters', 'Freshly Squeezed Orange Juice', 'Local Cane Sugar'],
+		Perfect_Manhattan: ['Bourbon', 'Sweet Vermouth'],
+		Sazerac: ['Bourbon', 'Bitters', 'Local Cane Sugar', 'Lemon Peel'],
+		Moscow_Mule: ['Vodka', 'Lime Juice'],
+		Tom_Collins: ['Gin', 'Lemon Juice', 'Local Cane Sugar', 'Soda'],
+		John_Collins: ['Bourbon', 'Lemon Peel', 'Local Cane Sugar', 'Soda'],
+		Brown_Dirby: ['Bourbon', 'Freshly Squeezed Grapefruit Juice', 'Local Cane Sugar']
+	});*/
